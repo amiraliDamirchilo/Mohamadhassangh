@@ -386,13 +386,54 @@
   .service-card p{font-size:14px;color:var(--text-muted);line-height:1.7;}
 
   /* ================= WORK ================= */
+  .work{background:var(--bg-soft);}
+  .work .glow-blob{background:#7c3aed;top:20%;left:-160px;}
+
+  .work-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:26px;position:relative;z-index:2;
+  }
+  .work-card{
+    position:relative;
+    border-radius:22px;
+    overflow:hidden;
+    aspect-ratio:4/3.1;
+    border:1px solid var(--card-border);
+    cursor:pointer;
+  }
+  .work-thumb{
+    position:absolute;inset:0;
+    background:var(--grad);
+    transition:transform .6s cubic-bezier(.16,.8,.3,1);
+  }
+  .work-card:hover .work-thumb{transform:scale(1.08);}
+  .work-overlay{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:26px;
+    background:linear-gradient(180deg, transparent 40%, rgba(6,3,12,0.92) 100%);
+  }
+  .work-tag{
+    font-size:11px;font-weight:700;letter-spacing:1px;color:var(--purple-light);
+    margin-bottom:8px;text-transform:uppercase;
+  }
+  .work-card h3{font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:space-between;gap:10px;}
+  .work-arrow{
+    width:38px;height:38px;border-radius:50%;
+    border:1px solid rgba(255,255,255,0.35);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+    transition:all .35s ease;
+  }
+  .work-card:hover .work-arrow{background:var(--purple);border-color:var(--purple);transform:rotate(45deg);}
+  .work-arrow svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2.2;}
+
+
   .work{
     position:relative;
     overflow:hidden;
     padding:90px 20px;
-    background:var(--bg-soft);
   }
-  .work .glow-blob{
+  .glow-blob{
     position:absolute;
     top:-200px; left:50%;
     width:700px; height:700px;
@@ -401,31 +442,36 @@
     filter:blur(60px);
     pointer-events:none;
   }
-  .work .container{
+  .container{
     max-width:1200px;
     margin:0 auto;
     position:relative;
     z-index:1;
   }
-  .work .section-head{
+  .section-head{
     text-align:center;
     margin-bottom:56px;
   }
-  .work .eyebrow{
+  .eyebrow{
     letter-spacing:.2em;
     font-size:12px;
-    color:var(--purple-light);
+    color:var(--accent);
     font-weight:700;
     margin-bottom:14px;
   }
-  .work .section-title{
+  .section-title{
     font-size:clamp(28px,4vw,44px);
     margin:0 0 14px;
     line-height:1.25;
-    max-width:100%;
   }
-  .work .section-sub{
-    color:var(--text-muted);
+  .section-title .accent{
+    background:linear-gradient(160deg,#c084fc,#7c3aed);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .section-sub{
+    color:var(--muted);
     font-size:16px;
     max-width:520px;
     margin:0 auto;
@@ -441,7 +487,7 @@
     position:relative;
     border-radius:18px;
     overflow:hidden;
-    background:rgba(255,255,255,0.02);
+    background:var(--card-bg);
     border:1px solid rgba(192,132,252,0.15);
     aspect-ratio:16/10;
     cursor:pointer;
@@ -483,7 +529,7 @@
   }
   .work-card:hover .play-btn{
     transform:translate(-50%,-50%) scale(1.1);
-    background:var(--purple);
+    background:var(--accent2);
   }
   .play-btn svg{
     width:20px; height:20px;
@@ -502,7 +548,7 @@
     display:inline-block;
     font-size:11px;
     letter-spacing:.08em;
-    color:var(--purple-light);
+    color:var(--accent);
     background:rgba(192,132,252,0.12);
     border:1px solid rgba(192,132,252,0.35);
     padding:3px 10px;
@@ -530,7 +576,6 @@
     width:100%; height:100%;
     border:0;
   }
-
   /* ================= TESTIMONIALS ================= */
   .testimonials{background:var(--bg);}
   .testimonials .glow-blob{background:#9333ea;bottom:-120px;left:40%;}
@@ -635,58 +680,30 @@
 
   /* ================= RESPONSIVE ================= */
   @media (max-width:1100px){
-    .hero{
-      grid-template-columns:1fr;
-      padding-top:40px;
-      min-height:auto;
-      background-image:none; /* Remove image background on mobile */
-      background:radial-gradient(circle at 50% 20%, rgba(107, 33, 168, 0.45) 0%, rgba(15, 8, 25, 0.95) 70%), var(--bg-soft);
-    }
+    .hero{grid-template-columns:1fr;padding-top:40px;min-height:auto;}
     .hero-right{order:-1;margin-bottom:20px;}
     .hero-title{font-size:52px;}
     header{padding:20px 24px;}
     nav ul{display:none;}
     .about-grid, .contact-grid{grid-template-columns:1fr;gap:50px;}
-    .about-visual{order:-1;height:auto;min-height:280px;width:100%;}
+    .about-visual{order:-1;height:360px;}
     .services-grid{grid-template-columns:repeat(2,1fr);}
     .work-grid{grid-template-columns:repeat(2,1fr);}
     .testi-grid{grid-template-columns:1fr;}
-    section:not(.hero){padding:80px 24px;}
+    section:not(.hero){padding:90px 24px;}
     .hero, .contact-grid{padding-left:24px;padding-right:24px;}
     .form-row{grid-template-columns:1fr;}
   }
 
   @media (max-width:640px){
-    .container{padding:0 20px;}
     .hero-title{font-size:38px;}
     .hero-buttons{flex-direction:column;align-items:stretch;}
-    .stats{gap:16px;justify-content:space-between;}
-    .stat{border-right:none;padding:0;flex:1;min-width:90px;}
-    .stat .num{font-size:26px;}
+    .stats{gap:16px;}
+    .stat{border-right:none;padding:0 16px 0 0;}
     .services-grid, .work-grid{grid-template-columns:1fr;}
     .section-title{font-size:32px;}
-    .contact-form{padding:24px;}
+    .contact-form{padding:28px;}
     footer{flex-direction:column;text-align:center;}
-
-    /* Optimized About section for Mobile */
-    .orbit-card{
-      width:240px;
-      height:240px;
-      border-radius:24px;
-    }
-    .orbit-card .initials{
-      font-size:64px;
-    }
-    .float-chip{
-      padding:8px 12px;
-      font-size:11px;
-    }
-    .chip-1{top:0;left:0;}
-    .chip-2{bottom:5%;right:0;}
-    .chip-3{bottom:-10%;left:10%;}
-    
-    .skills{gap:8px;}
-    .skill-tag{padding:8px 14px;font-size:12px;}
   }
 </style>
 </head>
@@ -742,14 +759,16 @@
       </div>
 
       <div class="stats hero-anim hero-anim-6">
-        <div class="stat" data-count="3"><div class="num">0+</div><div class="label">YEARS EXP.</div></div>
-        <div class="stat" data-count="100"><div class="num">0+</div><div class="label">PROJECTS</div></div>
+        <div class="stat" data-count="30"><div class="num">0+</div><div class="label">PROJECTS</div></div>
+        <div class="stat" data-count="2"><div class="num">0+</div><div class="label">YEARS EXP.</div></div>
         <div class="stat" data-count="20"><div class="num">0+</div><div class="label">CLIENTS</div></div>
+        <div class="stat" data-count="100" data-suffix="%"><div class="num">0%</div><div class="label">PASSION</div></div>
       </div>
     </div>
 
     <div class="hero-right">
       <div class="portrait-wrap">
+        <!-- Replace src with your own portrait+icon render. bgsite.png already carries the ambient glow/rings behind it. -->
         <img class="portrait" src="portrait.png" alt="mohamadhassan aghababaei portrait" onerror="this.style.display='none'">
       </div>
     </div>
@@ -765,7 +784,7 @@
         </div>
         <div class="float-chip chip-1"><span class="dot"></span> Premiere Pro</div>
         <div class="float-chip chip-2"><span class="dot"></span> After Effects</div>
-        <div class="float-chip chip-3"><span class="dot"></span> 3+ yrs experience</div>
+        <div class="float-chip chip-3"><span class="dot"></span> 2+ yrs experience</div>
       </div>
 
       <div class="about-text">
@@ -774,12 +793,13 @@
           <h2 class="section-title">Crafting stories through <span class="accent">motion &amp; design</span>.</h2>
         </div>
         <p class="reveal">I'm mohamad hassan, a designer and video editor who turns raw ideas into polished, on-brand visuals. My work sits at the intersection of clean design and fluid motion — built to make brands feel bigger, sharper, and more alive.</p>
-        <p class="reveal">Over the past three years I've partnered with startups and creators to ship bold visuals, seamless animations, and next-level video content that actually moves the needle for their audience.</p>
+        <p class="reveal">Over the past two years I've partnered with startups and creators to ship bold visuals, seamless animations, and next-level video content that actually moves the needle for their audience.</p>
         <div class="skills reveal">
           <span class="skill-tag">Premiere Pro</span>
           <span class="skill-tag">After Effects</span>
           <span class="skill-tag">Photoshop</span>
           <span class="skill-tag">Illustrator</span>
+          <span class="skill-tag">DaVinci Resolve</span>
           <span class="skill-tag">Brand Identity</span>
         </div>
       </div>
@@ -822,18 +842,64 @@
   </section>
 
   <!-- ================= WORK ================= -->
-  <section class="work" id="work">
-    <div class="glow-blob"></div>
-    <div class="container">
-      <div class="section-head">
-        <div class="eyebrow">SELECTED WORK</div>
-        <h2 class="section-title">Projects that <span class="accent">speak</span> for themselves.</h2>
-        <p class="section-sub">A snapshot of recent brand films, motion pieces, and identity work.</p>
-      </div>
-      <div class="work-grid" id="workGrid"></div>
+<section class="work" id="work">
+  <div class="glow-blob"></div>
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">SELECTED WORK</div>
+      <h2 class="section-title">Projects that <span class="accent">speak</span> for themselves.</h2>
+      <p class="section-sub">A snapshot of recent brand films, motion pieces, and identity work.</p>
     </div>
-  </section>
+    <div class="work-grid" id="workGrid"></div>
+  </div>
+</section>
 
+<script>
+const videos = [
+  { id: "NzMDpCKM2hQ", tag: "Brand Film",     title: "Video 01", grad: "linear-gradient(160deg,#7c3aed,#3b0764)", short:false },
+  { id: "VKAyLvWqmiE", tag: "Motion Design",  title: "Video 02", grad: "linear-gradient(160deg,#9333ea,#4c1d95)", short:false },
+  { id: "OI1iJLWPHGc", tag: "Brand Film",     title: "Video 03", grad: "linear-gradient(160deg,#c084fc,#6b21a8)", short:false },
+  { id: "941mKBW8g3g", tag: "Social Content", title: "Video 04", grad: "linear-gradient(160deg,#4c1d95,#1e0a3c)", short:true  },
+  { id: "uWFW8zbV8z4", tag: "Social Content", title: "Video 05", grad: "linear-gradient(160deg,#a855f7,#3b0764)", short:true  },
+  { id: "gOrN0cUXKzk", tag: "Social Content", title: "Video 06", grad: "linear-gradient(160deg,#6b21a8,#0a0512)", short:true  },
+  { id: "KqLI1HdbfKI", tag: "Social Content", title: "Video 07", grad: "linear-gradient(160deg,#7c3aed,#3b0764)", short:true  },
+  { id: "bEuZFd9uvfE", tag: "Social Content", title: "Video 08", grad: "linear-gradient(160deg,#9333ea,#4c1d95)", short:true  },
+  { id: "o72R2HZQUBw", tag: "Social Content", title: "Video 09", grad: "linear-gradient(160deg,#c084fc,#6b21a8)", short:true  },
+  { id: "VQoSUpAIp1k", tag: "Social Content", title: "Video 10", grad: "linear-gradient(160deg,#4c1d95,#1e0a3c)", short:true  }
+];
+
+const grid = document.getElementById("workGrid");
+
+videos.forEach(v => {
+  const card = document.createElement("div");
+  card.className = "work-card" + (v.short ? " short" : "");
+  card.style.setProperty("--grad", v.grad);
+
+  card.innerHTML = `
+    <div class="work-thumb">
+      <img loading="lazy" src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="${v.title}">
+    </div>
+    <div class="play-btn">
+      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    </div>
+    <div class="work-overlay">
+      <div class="work-tag">${v.tag}</div>
+      <h3>${v.title} <span class="work-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span></h3>
+    </div>
+  `;
+
+  card.addEventListener("click", () => {
+    if (card.querySelector("iframe")) return;
+    card.innerHTML = `<iframe
+        src="https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0"
+        title="${v.title}"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>`;
+  });
+
+  grid.appendChild(card);
+});
+</script>
   <!-- ================= TESTIMONIALS ================= -->
   <section class="testimonials" id="testimonials">
     <div class="glow-blob"></div>
@@ -904,26 +970,22 @@
         <div class="reveal">
           <div class="contact-info-item">
             <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M4 6l8 7 8-7"/></svg></div>
-            <div><div class="label">Email</div><div class="value">Mmad2004editor@gmail.com</div></div>
+            <div><div class="label">Email</div><div class="value">mohamadhassan@gmail.com</div></div>
           </div>
           <div class="contact-info-item">
             <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.11 4.18 2 2 0 014.09 2h3a2 2 0 012 1.72c.13.94.36 1.87.68 2.75a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.33-1.33a2 2 0 012.11-.45c.88.32 1.81.55 2.75.68A2 2 0 0122 16.92z"/></svg></div>
-            <div><div class="label">WhatsApp</div><div class="value">+9893922073733</div></div>
+            <div><div class="label">Phone</div><div class="value">+98 912 000 0000</div></div>
           </div>
           <div class="contact-info-item">
-            <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-16.5 7.5a2.25 2.25 0 0 0 .126 4.148l4.24 1.413 1.626 5.2a1.5 1.5 0 0 0 2.418.636l2.87-2.87 4.966 3.68a2.25 2.25 0 0 0 3.513-1.428l3.3-15.4a2.25 2.25 0 0 0-2.537-2.694z"/></svg></div>
-            <div><div class="label">Telegram</div><div class="value">@MHAG2004</div></div>
-          </div>
-          <div class="contact-info-item">
-            <div class="icon-box"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-            <div><div class="label">Instagram</div><div class="value">Cut.graph</div></div>
+            <div class="icon-box"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><div class="label">Location</div><div class="value">Tehran, Iran — remote worldwide</div></div>
           </div>
         </div>
 
         <div class="socials reveal">
-          <a class="social-btn" href="https://instagram.com/Cut.graph" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 3.5A1.5 1.5 0 1117 8.5 1.5 1.5 0 0117 5.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/></svg></a>
-          <a class="social-btn" href="https://t.me/MHAG2004" target="_blank" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg></a>
-          <a class="social-btn" href="https://wa.me/9893922073733" target="_blank" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12.012 2c-5.508 0-9.989 4.481-9.989 9.989 0 1.764.46 3.483 1.332 5.003l-1.416 5.17 5.292-1.388c1.468.801 3.129 1.224 4.781 1.224 5.508 0 9.989-4.481 9.989-9.989s-4.481-9.989-9.989-9.989zm5.82 14.331c-.244.688-1.22 1.258-1.996 1.348-.528.061-1.215.111-3.535-.85-2.968-1.228-4.88-4.238-5.029-4.436-.148-.198-1.208-1.608-1.208-3.067 0-1.459.764-2.177 1.037-2.472.274-.295.597-.369.796-.369.199 0 .398.002.572.01.184.008.431-.07.674.513.244.582.831 2.029.903 2.177.072.148.12.321.023.513-.097.192-.148.312-.295.485-.148.173-.312.387-.446.52-.148.148-.302.309-.13.604.172.295.767 1.267 1.646 2.049 1.131 1.008 2.086 1.32 2.38 1.468.295.148.468.123.64-.074.172-.198.743-.865.941-1.162.198-.297.397-.247.67-.148.273.099 1.737.82 2.035.968.298.148.496.223.57.347.074.124.074.717-.17 1.405z"/></svg></a>
+          <a class="social-btn" href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 3.5A1.5 1.5 0 1117 8.5 1.5 1.5 0 0117 5.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/></svg></a>
+          <a class="social-btn" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.9 3.9 6 2.5 6S0 4.9 0 3.5 1.1 1 2.5 1s2.48 1.1 2.48 2.5zM.5 8h4V23h-4V8zm7 0h3.8v2.05h.05C11.9 8.9 13.4 8 15.5 8c4 0 4.7 2.6 4.7 6V23h-4v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.65 1.8-2.65 3.65V23h-4V8z"/></svg></a>
+          <a class="social-btn" href="#" aria-label="Behance"><svg viewBox="0 0 24 24"><path d="M4 6h6.6c3.9 0 4.7 2.1 4.7 3.7 0 1.1-.4 1.9-1.4 2.6 1.5.5 2.3 1.6 2.3 3.3 0 2.6-2.1 4.2-5.4 4.2H4V6zm3 5.9h3.1c1.2 0 2-.5 2-1.6 0-1.1-.8-1.5-2-1.5H7v3.1zm0 6.1h3.3c1.4 0 2.3-.6 2.3-1.8 0-1.2-.8-1.8-2.2-1.8H7v3.6zM19.8 8h-4.6V6.6h4.6V8zM14.7 15c.1 1.3 1 2.1 2.3 2.1.9 0 1.6-.4 1.9-1.1h2.7c-.4 1.9-2.2 3.2-4.6 3.2-3 0-5-2-5-5.2 0-3.1 2.1-5.3 5-5.3 3 0 4.8 2.1 4.8 5.2v.5l-7.1.6z"/></svg></a>
         </div>
       </div>
 
@@ -974,51 +1036,6 @@
   </footer>
 
   <script>
-    const videos = [
-      { id: "NzMDpCKM2hQ", tag: "Brand Film",     title: "Video 01", grad: "linear-gradient(160deg,#7c3aed,#3b0764)", short:false },
-      { id: "VKAyLvWqmiE", tag: "Motion Design",  title: "Video 02", grad: "linear-gradient(160deg,#9333ea,#4c1d95)", short:false },
-      { id: "OI1iJLWPHGc", tag: "Brand Film",     title: "Video 03", grad: "linear-gradient(160deg,#c084fc,#6b21a8)", short:false },
-      { id: "941mKBW8g3g", tag: "Social Content", title: "Video 04", grad: "linear-gradient(160deg,#4c1d95,#1e0a3c)", short:true  },
-      { id: "uWFW8zbV8z4", tag: "Social Content", title: "Video 05", grad: "linear-gradient(160deg,#a855f7,#3b0764)", short:true  },
-      { id: "gOrN0cUXKzk", tag: "Social Content", title: "Video 06", grad: "linear-gradient(160deg,#6b21a8,#0a0512)", short:true  },
-      { id: "KqLI1HdbfKI", tag: "Social Content", title: "Video 07", grad: "linear-gradient(160deg,#7c3aed,#3b0764)", short:true  },
-      { id: "bEuZFd9uvfE", tag: "Social Content", title: "Video 08", grad: "linear-gradient(160deg,#9333ea,#4c1d95)", short:true  },
-      { id: "o72R2HZQUBw", tag: "Social Content", title: "Video 09", grad: "linear-gradient(160deg,#c084fc,#6b21a8)", short:true  },
-      { id: "VQoSUpAIp1k", tag: "Social Content", title: "Video 10", grad: "linear-gradient(160deg,#4c1d95,#1e0a3c)", short:true  }
-    ];
-
-    const grid = document.getElementById("workGrid");
-
-    videos.forEach(v => {
-      const card = document.createElement("div");
-      card.className = "work-card" + (v.short ? " short" : "");
-      card.style.setProperty("--grad", v.grad);
-
-      card.innerHTML = `
-        <div class="work-thumb">
-          <img loading="lazy" src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="${v.title}">
-        </div>
-        <div class="play-btn">
-          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        </div>
-        <div class="work-overlay">
-          <div class="work-tag">${v.tag}</div>
-          <h3>${v.title} <span class="work-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></span></h3>
-        </div>
-      `;
-
-      card.addEventListener("click", () => {
-        if (card.querySelector("iframe")) return;
-        card.innerHTML = `<iframe
-            src="https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0"
-            title="${v.title}"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>`;
-      });
-
-      grid.appendChild(card);
-    });
-
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Sticky header shrink on scroll
@@ -1027,15 +1044,16 @@
       header.classList.toggle('scrolled', window.scrollY > 20);
     });
 
-    // Hero entrance sequence
+    // Hero entrance sequence — trigger once page paints
     window.addEventListener('load', () => {
       requestAnimationFrame(() => {
         document.body.classList.add('loaded');
       });
     });
+    // Fallback in case 'load' already fired or is slow (e.g. missing images)
     setTimeout(() => document.body.classList.add('loaded'), 500);
 
-    // Smooth scroll
+    // Smooth scroll for internal links
     document.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener('click', function(e){
         const href = this.getAttribute('href');
@@ -1047,7 +1065,7 @@
       });
     });
 
-    // Scroll-spy
+    // Scroll-spy: highlight active nav link based on visible section
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
     const spyObserver = new IntersectionObserver((entries) => {
@@ -1061,7 +1079,7 @@
     }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
     sections.forEach(s => spyObserver.observe(s));
 
-    // Reveal-on-scroll
+    // Reveal-on-scroll animation with gentle stagger
     const revealEls = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
@@ -1074,7 +1092,7 @@
     }, { threshold: 0.15 });
     revealEls.forEach(el => revealObserver.observe(el));
 
-    // Animated stat counters
+    // Animated stat counters — run once stats scroll into view
     const statEls = document.querySelectorAll('.stat[data-count]');
     const countObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1087,7 +1105,7 @@
           const start = performance.now();
           function tick(now){
             const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
+            const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
             const value = Math.round(target * eased);
             numEl.textContent = value + suffix;
             if(progress < 1){
@@ -1103,7 +1121,7 @@
     }, { threshold: 0.4 });
     statEls.forEach(el => countObserver.observe(el));
 
-    // 3D tilt
+    // Subtle 3D tilt on cards, following the cursor
     if(!reduceMotion && window.matchMedia('(hover:hover)').matches){
       document.querySelectorAll('.tilt').forEach(card => {
         card.addEventListener('mousemove', (e) => {
@@ -1118,7 +1136,7 @@
       });
     }
 
-    // Parallax glow
+    // Gentle parallax drift on ambient glow blobs while scrolling
     if(!reduceMotion){
       const blobs = document.querySelectorAll('.glow-blob');
       let ticking = false;
@@ -1146,7 +1164,7 @@
       progressBar.style.width = pct + '%';
     });
 
-    // Contact form
+    // Contact form (front-end only, no backend)
     const form = document.getElementById('contactForm');
     const note = document.getElementById('formNote');
     form.addEventListener('submit', function(e){
